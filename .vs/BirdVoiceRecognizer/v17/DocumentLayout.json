@@ -1,0 +1,124 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\functions\\audioupload\\uploadvoiceaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\functions\\audioupload\\uploadvoiceaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\functions\\audioanalysis\\getanalysisresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\functions\\audioanalysis\\getanalysisresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\services\\cosmodbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\services\\cosmodbservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\services\\blobstrorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\services\\blobstrorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\models\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\models\\audiofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|c:\\users\\eero\\source\\repos\\birdvoicesrecognizer\\birdvoicerecognizer\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A8182092-A95E-4D13-8331-DE0FC25B1DE3}|BirdVoiceRecognizer\\BirdVoiceRecognizer.csproj|solutionrelative:birdvoicerecognizer\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AudioFile.cs",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Models\\AudioFile.cs",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\Models\\AudioFile.cs",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Models\\AudioFile.cs",
+              "RelativeToolTip": "BirdVoiceRecognizer\\Models\\AudioFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T18:55:37.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "local.settings.json",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\local.settings.json",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\local.settings.json",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\local.settings.json",
+              "RelativeToolTip": "BirdVoiceRecognizer\\local.settings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-14T18:36:56.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BlobStrorageService.cs",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Services\\BlobStrorageService.cs",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\Services\\BlobStrorageService.cs",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Services\\BlobStrorageService.cs",
+              "RelativeToolTip": "BirdVoiceRecognizer\\Services\\BlobStrorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T16:44:54.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CosmoDBService.cs",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Services\\CosmoDBService.cs",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\Services\\CosmoDBService.cs",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Services\\CosmoDBService.cs",
+              "RelativeToolTip": "BirdVoiceRecognizer\\Services\\CosmoDBService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T16:43:29.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GetAnalysisResult.cs",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Functions\\AudioAnalysis\\GetAnalysisResult.cs",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\Functions\\AudioAnalysis\\GetAnalysisResult.cs",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Functions\\AudioAnalysis\\GetAnalysisResult.cs",
+              "RelativeToolTip": "BirdVoiceRecognizer\\Functions\\AudioAnalysis\\GetAnalysisResult.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T16:40:00.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UploadVoiceAudio.cs",
+              "DocumentMoniker": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Functions\\AudioUpload\\UploadVoiceAudio.cs",
+              "RelativeDocumentMoniker": "BirdVoiceRecognizer\\Functions\\AudioUpload\\UploadVoiceAudio.cs",
+              "ToolTip": "C:\\Users\\Eero\\source\\repos\\BirdVoicesRecognizer\\BirdVoiceRecognizer\\Functions\\AudioUpload\\UploadVoiceAudio.cs",
+              "RelativeToolTip": "BirdVoiceRecognizer\\Functions\\AudioUpload\\UploadVoiceAudio.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-14T16:25:32.785Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

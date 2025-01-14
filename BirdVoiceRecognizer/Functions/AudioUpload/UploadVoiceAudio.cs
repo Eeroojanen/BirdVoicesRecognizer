@@ -1,20 +1,22 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using Azure.Storage.Blobs;
-using System.Linq;
+using BirdVoiceRecognizer.Models;
+using System;
 
-public static class UploadVoiceAudio
+public static class UploadAudio
 {
+    private static readonly string[] ValidExtensions = { ".wav", ".mp3" };
+
     [FunctionName("UploadAudio")]
     public static async Task<IActionResult> Run(
-    [HttpTrigger(AuthorizationLevel.Function, "post", Route = "upload")] HttpRequest req,
-    ILogger log)
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "upload")] HttpRequest req,
+        ILogger log)
     {
         log.LogInformation("Processing upload request...");
 
@@ -24,23 +26,30 @@ public static class UploadVoiceAudio
         }
 
         var file = req.Form.Files[0];
-
-        var validExtensions = new[] { ".wav", ".mp3" };
         var fileExtension = Path.GetExtension(file.FileName).ToLower();
-        if (Array.IndexOf(validExtensions, fileExtension) == -1)
+
+        if (!ValidExtensions.Contains(fileExtension))
         {
-            return new BadRequestObjectResult("Invalid file only .wav and .mp3 are allowed.");
+            return new BadRequestObjectResult("Invalid file type. Only .wav and .mp3 are allowed.");
         }
 
-        var filePath = Path.Combine("C:\\Users\\Ertsi\\source\\repos\\BirdVoiceRecognizer\\BirdVoiceRecognizer\\Models", file.FileName);
-        using (var stream = new FileStream(filePath, FileMode.Create))
+        using (var memoryStream = new MemoryStream())
         {
-            await file.CopyToAsync(stream);
+            await file.CopyToAsync(memoryStream);
+
+            var audioFile = new AudioFile
+            {
+                Id = Guid.NewGuid().ToString(),
+                FileName = file.FileName,
+                Content = memoryStream.ToArray(),
+                UploadedAt = DateTime.UtcNow
+            };
+
+            await CosmoDBService.SaveAudioFileAsync(audioFile);
         }
 
-        log.LogInformation("File uploaded and saved locally.");
+        log.LogInformation("File uploaded successfully.");
 
         return new OkObjectResult("File uploaded successfully.");
     }
-
 }

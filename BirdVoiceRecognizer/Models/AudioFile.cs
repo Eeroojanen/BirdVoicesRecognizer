@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace BirdVoiceRecognizer.Models
 {
-    internal class AudioFile
+    public class AudioFile
     {
+        public string Id { get; set; }
+        public string FileName { get; set; }
+        public byte[] Content { get; set; }
+        public DateTime UploadedAt { get; set; }
+        public string AnalysisResult { get; set; }
     }
+
 }
