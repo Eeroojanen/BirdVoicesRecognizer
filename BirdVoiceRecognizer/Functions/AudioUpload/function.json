@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "type": "httpTrigger",
+      "authLevel": "function",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"],
+      "route": "upload"
+    },
+    {
+      "type": "blob",
+      "direction": "out",
+      "name": "outputBlob",
+      "path": "audio-files/{rand-guid}.wav",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "type": "blobTrigger",
+      "direction": "in",
+      "name": "inputBlob",
+      "path": "audio-files/{name}",
+      "connection": "AzureWebJobsStorage"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "outputDocument",
+      "databaseName": "VoiceRecognitionDB",
+      "containerName": "RecognitionResults",
+      "connectionStringSetting": "CosmosDBConnection"
+    }
+  ]
+}
