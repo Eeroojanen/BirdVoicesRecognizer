@@ -1,50 +1,46 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using Azure.Storage.Blobs;
+using System.Linq;
 
-namespace BirdVoiceRecognizer.Functions.AudioRecognizer
+public static class UploadVoiceAudio
 {
-    public static class UploadVoiceAudio
+    [FunctionName("UploadAudio")]
+    public static async Task<IActionResult> Run(
+    [HttpTrigger(AuthorizationLevel.Function, "post", Route = "upload")] HttpRequest req,
+    ILogger log)
     {
-        [FunctionName("UploadVoiceAudio")]
-        public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "upload")] HttpRequest req,
-            ILogger log)
+        log.LogInformation("Processing upload request...");
+
+        if (!req.Form.Files.Any())
         {
-            log.LogInformation("Processing audio upload...");
-
-            try
-            {
-                var formFile = req.Form.Files["file"];
-                if (formFile == null)
-                {
-                    return new BadRequestObjectResult(new { message = "No file uploaded." });
-                }
-
-                using (var memoryStream = new MemoryStream())
-                {
-                    await formFile.CopyToAsync(memoryStream);
-                    memoryStream.Seek(0, SeekOrigin.Begin);
-
-                    var audioData = memoryStream.ToArray();
-
-                    log.LogInformation("File uploaded and stored in memory.");
-
-
-                    return new OkObjectResult(new { message = "File uploaded successfully and processed." });
-                }
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, "Error processing audio upload.");
-                return new BadRequestObjectResult(new { message = "Failed to upload or process file." });
-            }
+            return new BadRequestObjectResult("No file found in the request.");
         }
+
+        var file = req.Form.Files[0];
+
+        var validExtensions = new[] { ".wav", ".mp3" };
+        var fileExtension = Path.GetExtension(file.FileName).ToLower();
+        if (Array.IndexOf(validExtensions, fileExtension) == -1)
+        {
+            return new BadRequestObjectResult("Invalid file only .wav and .mp3 are allowed.");
+        }
+
+        var filePath = Path.Combine("C:\\Users\\Ertsi\\source\\repos\\BirdVoiceRecognizer\\BirdVoiceRecognizer\\Models", file.FileName);
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        log.LogInformation("File uploaded and saved locally.");
+
+        return new OkObjectResult("File uploaded successfully.");
     }
+
 }
