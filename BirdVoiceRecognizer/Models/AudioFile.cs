@@ -8,11 +8,11 @@ namespace BirdVoiceRecognizer.Models
 {
     public class AudioFile
     {
-        public string id { get; set; }
-        public string fileName { get; set; }
-        public byte[] content { get; set; }
-        public string blobUrl {get; set;}
-        public DateTime uploadedAt { get; set; }
+       public string? id { get; set; }
+        public string? FileName { get; set; }
+        public string? ContentType { get; set; }
+        public long? FileSize { get; set; }
+        public string? BlobUrl { get; set; }
+        public DateTime UploadTime { get; set; }
     }
-
 }

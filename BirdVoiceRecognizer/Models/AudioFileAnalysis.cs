@@ -8,8 +8,10 @@ namespace BirdVoiceRecognizer.Models
 {
     public class AudioFileAnalysis
     {
-        public string fileName { get; set; }
-        public string analysisResult { get; set; }
-        public string analysisMessage { get; set; }
+        public string? id { get; set; }
+        public string? fileName { get; set; }
+        public string? AnalysisResult { get; set; }
+        public double ConfidenceScore { get; set; }
+        public DateTime AnalysisTime { get; set; }
     }
 }
