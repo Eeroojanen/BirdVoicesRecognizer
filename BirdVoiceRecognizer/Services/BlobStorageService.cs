@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 public class BlobStorageService : IBlobStorageService
 {
-    private readonly string _blobConnectionString;
     private readonly string _containerName;
     private readonly BlobServiceClient _blobServiceClient;
 

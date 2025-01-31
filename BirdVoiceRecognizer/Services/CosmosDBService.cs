@@ -50,6 +50,6 @@ public class CosmosDBService : ICosmosDBService
 
     public async Task SaveAnalysisResultAsync(AudioFileAnalysis analysisResult)
     {
-        await _audioFileAnalysisContainer.CreateItemAsync(analysisResult, new PartitionKey(analysisResult.fileName));
+        await _audioFileAnalysisContainer.CreateItemAsync(analysisResult, new PartitionKey(analysisResult.FileName));
     }
 }
