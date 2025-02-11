@@ -42,14 +42,14 @@ variables:
 name: $(Date:yyyyMMdd)$(Rev:.r)_$(SourceBranchName)_$(why)_$(envShortName)
 
 stages:
-  - template: pipelines/build.yml
+  - template: build.yml
     parameters:
       Environment: ${{ parameters.Environment }}
       ProjectName: ${{ parameters.ProjectName }}
       SkipLint: ${{ parameters.SkipLint }}
 
   - ${{ if not(eq(parameters.Environment,'BuildOnly')) }}:
-    - template: pipelines/release.yml
+    - template: release.yml
       parameters:
         Environment: ${{ parameters.Environment }}
         ProjectName: ${{ parameters.ProjectName }}
