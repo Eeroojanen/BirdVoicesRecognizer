@@ -10,6 +10,9 @@ param storageAccountConnectionString string
 @description('Cosmos DB connection string.')
 param cosmosDbConnectionString string
 
+@description('Function App Principal ID (System Assigned Identity).')
+param functionAppPrincipalId string
+
 resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
   name: keyVaultName
   location: keyVaultLocation
@@ -39,6 +42,25 @@ resource cosmosDbSecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
   name: 'cosmosDbConnectionString'
   properties: {
     value: cosmosDbConnectionString
+  }
+}
+
+resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
+  parent: keyVault
+  name: 'add'
+  properties: {
+    accessPolicies: [
+      {
+        objectId: functionAppPrincipalId
+        tenantId: subscription().tenantId
+        permissions: {
+          secrets: [
+            'get'
+            'list'
+          ]
+        }
+      }
+    ]
   }
 }
 

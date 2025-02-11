@@ -1,0 +1,38 @@
+stages:
+- stage: Build
+  displayName: Build${{ parameters.ProjectName }}
+
+  jobs:
+    - job: lint
+      displayName: Lint code base
+      condition: and(eq(${{ parameters.SkipLint }}, false), ne(variables['Build.Reason'], 'IndividualCI'))
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+      - script: docker pull github/super-linter:latest
+        displayName: Pull GitHub Super-Linter image
+      - script: >-
+          docker run \
+            -e RUN_LOCAL=true \
+            -e VALIDATE_JSCPD=false \
+            -e VALIDATE_MARKDOWN=false \
+            -e VALIDATE_EDITORCONFIG=false \
+            -v $(System.DefaultWorkingDirectory):/tmp/lint \
+            github/super-linter
+        displayName: 'Run GitHub Super-Linter'
+        continueOnError: true
+
+    - job: build
+      displayName: Build and Test, create artifacts
+      pool:
+        vmImage: 'windows-latest'
+      variables:
+        BuildConfiguration: 'Release'
+      steps:
+        - template: build-dotnet.yml
+          parameters:
+            ProjectServiceName: ${{ parameters.ProjectName }}
+            RestoreBuildProjects: '**/*.csproj'
+            TestProjects: 'tests/**/*.csproj'
+            DotnetVersion: '$(DotnetVersion)'
+            SimpleFunctionApp: '**/DevTestPlayground.SimpleFunction.csproj'

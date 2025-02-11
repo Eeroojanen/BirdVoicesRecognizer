@@ -1,0 +1,17 @@
+steps:
+- checkout: self
+  clean: true
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifactName: '${{ parameters.ProjectName }}'
+    buildType: 'current'
+    targetPath: '$(Build.ArtifactStagingDirectory)\${{ parameters.ProjectName }}'
+
+- task: AzureFunctionApp@2
+  displayName: 'Azure Function App Deploy'
+  inputs:
+    azureSubscription: '$(AzureServiceConnection)'
+    appType: 'functionApp'
+    appName: '${{ parameters.AppServiceName }}'
+    package: '$(Build.ArtifactStagingDirectory)\${{ parameters.ProjectName }}\${{ parameters.FunctionPackageName }}.zip'

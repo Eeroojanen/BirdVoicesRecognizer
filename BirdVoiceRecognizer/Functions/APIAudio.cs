@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using BirdVoiceRecognizer.Models;
 using Microsoft.Extensions.Logging;
+using Microsoft.Azure.WebJobs.Extensions.Http;
 
 public class APIAudio
 {
@@ -20,7 +20,7 @@ public class APIAudio
 
     [FunctionName("UploadAudioFile")]
     public async Task<IActionResult> UploadAudioFile(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "upload")] HttpRequest req)
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "upload")] HttpRequest req)
     {
         var file = req.Form.Files["file"];
         if (file == null || file.Length == 0)
@@ -52,7 +52,7 @@ public class APIAudio
 
     [FunctionName("GetAudioFileAnalysis")]
     public async Task<IActionResult> GetAudioFileAnalysis(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "audio/{fileName}")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "audio/{fileName}")] HttpRequest req,
         string fileName)
     {
         var audioFile = await _cosmosDBService.GetAnalysisResultAsync(fileName);
@@ -62,6 +62,15 @@ public class APIAudio
         }
 
         return new OkObjectResult(audioFile);
+    }
+
+    [FunctionName("GetHealthCheck")]
+    public static async Task<IActionResult> GetHealthCheck(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "status")] HttpRequest req,
+        ILogger log)
+    {
+        string status = "Status is OKAY!";
+        return new OkObjectResult(status);
     }
 
     private AudioFile CreateAudioFileInstance(IFormFile file, string blobUrl)

@@ -1,0 +1,35 @@
+stages:
+- stage: Deploy
+  displayName: Deploy${{ parameters.ProjectName }}
+  variables:
+  - group: Deploy-Environment-${{ parameters.Environment }}
+  jobs:
+  - deployment: DeployFunction
+    displayName: Deploy Azure Function App to Azure
+    pool:
+      vmImage: 'windows-latest'
+    environment: ${{ parameters.Environment }}
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - template: deploy-function.yml
+              parameters:
+                Environment: ${{ parameters.Environment }}
+                ProjectName: ${{ parameters.ProjectName }}
+                FunctionPackageName: 'DevTestPlayground.SimpleFunction'
+                AppServiceName: '$(AppServiceNameSimpleFunction)'
+
+  - job: DeployAgentlessJob
+    displayName: Run function app
+    dependsOn: DeployFunction
+    pool: server
+    steps:
+      - task: AzureFunction@1
+        displayName: 'Invoke Azure Function to run the function'
+        inputs:
+          function: '$(SimpleFunctionUrl)'
+          key: '$(SimpleFunctionKey)'
+          method: 'POST'
+          waitForCompletion: 'false'
+          body: '{ "name": "AzurePipeline" }'

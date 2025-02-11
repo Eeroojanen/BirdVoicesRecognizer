@@ -1,0 +1,44 @@
+steps:
+- checkout: self
+  clean: true
+
+- task: UseDotNet@2
+  displayName: 'Install Dotnet Core cli'
+  inputs:
+    version: ${{ parameters.DotnetVersion }}
+
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet restore'
+  inputs:
+    command: 'restore'
+    projects: |
+      ${{ parameters.RestoreBuildProjects }}
+      ${{ parameters.TestProjects }}
+    feedsToUse: 'config'
+    nugetConfigPath: NuGet.config
+
+- task: DotNetCoreCLI@2
+  displayName: 'Dotnet build'
+  inputs:
+    command: 'build'
+    projects: |
+      ${{ parameters.SimpleFunctionApp }}
+    arguments: --configuration $(BuildConfiguration) --no-restore
+
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    zipAfterPublish: true
+    projects: |
+      ${{ parameters.SimpleFunctionApp }}
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-restore'
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish pipeline artifacts
+  condition: ne(variables['Build.Reason'], 'PullRequest')
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)'
+    artifactName: '${{ parameters.ProjectServiceName }}'
+    publishLocation: 'pipeline'

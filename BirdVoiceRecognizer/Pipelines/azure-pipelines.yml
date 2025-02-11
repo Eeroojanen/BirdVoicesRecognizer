@@ -1,0 +1,55 @@
+parameters:
+  - name: environment
+    displayName: Environment
+    type: string
+    default: BuildOnly
+    values:
+    - BuildOnly
+    - Development
+  - name: projectName
+    displayName: ProjectName
+    type: string
+    default: BirdVoiceRecognizer
+  - name: skipLint
+    displayName: SkipLint
+    type: boolean
+    default: false
+
+trigger:
+  - dev
+
+variables:
+  - group: Deploy-Environment-Shared
+  - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
+    - name: why
+      value: pr
+  - ${{ elseif eq(variables['Build.Reason'], 'Manual' ) }}:
+    - name: why
+      value: manual
+  - ${{ elseif eq(variables['Build.Reason'], 'IndividualCI' ) }}:
+    - name: why
+      value: indivci
+  - ${{ else }}:
+    - name: why
+      value: other
+  - ${{ if eq(parameters.Environment, 'Development') }}:
+    - name: envShortName
+      value: dev
+  - ${{ else }}:
+    - name: envShortName
+      value: none
+
+name: $(Date:yyyyMMdd)$(Rev:.r)_$(SourceBranchName)_$(why)_$(envShortName)
+
+stages:
+  - template: pipelines/build.yml
+    parameters:
+      Environment: ${{ parameters.Environment }}
+      ProjectName: ${{ parameters.ProjectName }}
+      SkipLint: ${{ parameters.SkipLint }}
+
+  - ${{ if not(eq(parameters.Environment,'BuildOnly')) }}:
+    - template: pipelines/release.yml
+      parameters:
+        Environment: ${{ parameters.Environment }}
+        ProjectName: ${{ parameters.ProjectName }}

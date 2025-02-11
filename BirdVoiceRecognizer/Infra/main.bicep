@@ -22,6 +22,16 @@ param audioFileAnalysis string = 'audioFileAnalysis'
 @description('Name for function app')
 param functionAppName string = 'mp3-analysis-func-${uniqueString(resourceGroup().id)}'
 
+module functionAppModule 'functionapp.bicep' = {
+  name: 'functionAppDeployment'
+  params: {
+    functionAppName: functionAppName
+    location: location
+    appInsightsLocation: location
+    functionWorkerRuntime: 'dotnet'
+    keyVaultName: keyVaultName
+  }
+}
 
 module storageModule 'storage.bicep' = {
   name: 'storageDeployment'
@@ -48,18 +58,12 @@ module keyVaultModule 'keyvault.bicep' = {
     keyVaultLocation: keyVaultLocation
     storageAccountConnectionString: 'DefaultEndpointsProtocol=https;AccountName=${storageModule.outputs.storageName};AccountKey=${storageModule.outputs.storageKey}'
     cosmosDbConnectionString: 'AccountEndpoint=https://${cosmosDbModule.outputs.accountName}.documents.azure.com:443/;AccountKey=${cosmosDbModule.outputs.accountKey};'
-  }
-}
-
-module functionModule './functionApp.bicep' = {
-  name: 'FunctionAppDeployment'
-  params: {
-    location: location
-    functionAppName: functionAppName
-    storageConnectionString: keyVaultModule.outputs.storageSecretName
+    functionAppPrincipalId: functionAppModule.outputs.principalId
   }
 }
 
 output keyVaultUri string = keyVaultModule.outputs.keyVaultUri
 output containerName string = storageModule.outputs.containerName
-output functionAppUrl string = functionModule.outputs.functionAppUrl
+output functionAppNameOutput string = functionAppModule.outputs.functionAppNameOutput
+output storageAccountNameOutput string = functionAppModule.outputs.storageAccountNameOutput
+output applicationInsightsNameOutput string = functionAppModule.outputs.applicationInsightsNameOutput
